@@ -13,6 +13,7 @@ templates = Jinja2Templates(directory="templates")
 # Mock sneaker data - Gen-Z vibes
 SNEAKERS = [
     {
+        "id": 1,
         "name": "Air Flux Neon",
         "brand": "StreetVibe",
         "price": 149.99,
@@ -169,10 +170,10 @@ async def product_detail(request: Request, product_id: int):
     product = next((s for s in SNEAKERS if s["id"] == product_id), None)
     if not product:
       return JSONResponse(content={"error": "Product not found"}, status_code=404)
-    return templates.TemplateResponse("product.html", {
+    return templates.TemplateResponse("product.txt", {
         "request": request,
         "product": product,
-        "page_title": f"{product['name']} - SneakPeak"
+        "pageTitle": f"{product['name']} - SneakPeak"
     })
 
 @app.get("/checkout")
